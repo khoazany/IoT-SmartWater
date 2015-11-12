@@ -34,9 +34,9 @@ var channel1 = "http://api.thingspeak.com/channels/63279";
 var channel2 = "http://api.thingspeak.com/channels/64795";
 
 // HARDCODE AVERAGE CONSUMPTION
-AVERAGE_CONSUMPTION_DAY = 1000;
-AVERAGE_CONSUMPTION_HOUR = 100;
-AVERAGE_CONSUMPTION_MINUTE = 10;
+AVERAGE_CONSUMPTION_DAY = 740.6111111;
+AVERAGE_CONSUMPTION_HOUR = 30.8587963;
+AVERAGE_CONSUMPTION_MINUTE = 0.514313272;
 
 // Field numbers on ThingSpeak
 var fields = [1,2]
@@ -941,26 +941,29 @@ function generateAlertTable () {
     var alerts = JSON.parse(localStorage.getItem('alerts'));
 
     var tableHtml = '';
-    for (var i = 0; i < alerts.length; i++) {
-        if(alerts[i] != null) {
-            tableHtml += '<tr>' +
-            '<td class="text-center">' + moment(alerts[i].timestamp).format("DD/MM/YYYY HH:mm:ss") + '</td>' +
-            '<td><strong>' + alerts[i].location + '</strong></td>' + 
-            '<td>' + alerts[i].alert + '</td>';
-            if(alerts[i].status == 'Unresolved') {
-                tableHtml += '<td><span class="label label-warning">Unresolved</span></td>' + 
-                '<td class="text-center">' + 
-                '<a onClick="resolve(' + i + ')" data-toggle="tooltip" ' + 
-                'title="Click here after the issue has been resolved" ' + 
-                'class="btn btn-effect-ripple btn-xs btn-success">' + 
-                '<i class="fa fa-check"></i></a>' + 
-                '</td></tr>';
-            } else {
-                tableHtml += '<td><span class="label label-success">Resolved</span></td>' + 
-                '<td class="text-center">' + 
-                '</td></tr>';
+    if(alerts) {
+        for (var i = 0; i < alerts.length; i++) {
+            if(alerts[i] != null) {
+                tableHtml += '<tr>' +
+                '<td class="text-center">' + moment(alerts[i].timestamp).format("DD/MM/YYYY HH:mm:ss") + '</td>' +
+                '<td><strong>' + alerts[i].location + '</strong></td>' + 
+                '<td>' + alerts[i].alert + '</td>';
+                if(alerts[i].status == 'Unresolved') {
+                    tableHtml += '<td><span class="label label-warning">Unresolved</span></td>' + 
+                    '<td class="text-center">' + 
+                    '<a onClick="resolve(' + i + ')" data-toggle="tooltip" ' + 
+                    'title="Click here after the issue has been resolved" ' + 
+                    'class="btn btn-effect-ripple btn-xs btn-success">' + 
+                    '<i class="fa fa-check"></i></a>' + 
+                    '</td></tr>';
+                } else {
+                    tableHtml += '<td><span class="label label-success">Resolved</span></td>' + 
+                    '<td class="text-center">' + 
+                    '</td></tr>';
+                }
             }
         }
+
     }
 
     $('#alert-table').html(tableHtml);
