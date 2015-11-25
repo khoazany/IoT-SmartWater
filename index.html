@@ -10,7 +10,6 @@
 <!--
 <link rel="stylesheet" href="app/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 -->
-<link href="bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <link href="pace-theme.css" rel="stylesheet" />
 
 <!-- Our custom CSS -->
@@ -174,14 +173,18 @@
 
 
                             <li>
-                            	<a id="water-consumption" onclick="changeView('water-consumption')" class="sidebar-nav-menu active"><i class="fa sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Water Consumption</span></a>
+                            	<a id="water-consumption" onclick="changeView('water-consumption')" class="sidebar-nav-menu active"><i class="fa sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-tint sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Water Consumption</span></a>
                             </li>
 
-                            <li><a id="pipe-map" onclick="changeView('pipe-map')"><i class="fa fa-cloud sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Pipe Map</span></a>		
+                            <li><a id="pipe-map" onclick="changeView('pipe-map')"><i class="fa fa-random sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Pipe Map</span></a>		
 
                             </li>
 
-                            <li><a id="alerts" onclick="changeView('alerts')"><i class="fa fa-users sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Alerts</span></a>		
+                            <li><a id="alerts" onclick="changeView('alerts')"><i class="fa fa-bell sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Alerts</span></a>		
+
+                            </li>
+
+                            <li><a id="settings" onclick="changeView('settings')"><i class="fa fa-cogs sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Settings</span></a>		
 
                             </li>
 
@@ -363,6 +366,7 @@
                     			<div class="col-sm-3">
                     				<label for="filter-type">Step 1: Choose view option</label>
                     				<select class="form-control" id="filter-type">
+                    					<option value="month">Month</option>
                     					<option value="day">Day</option>
                     					<option value="hour">Hour</option>
                     					<option value="minute">Minute</option>
@@ -388,92 +392,155 @@
                     					</span>
                     				</div>
                     			</div>
+                    			
                     			<div class="col-sm-3">
                     				<label for="filter-type">Step 4:</label>
-                    				<button onclick="viewChart()" class="form-control btn btn-primary" id='view' />View chart</button>
+                    				<div onclick="viewChart()" class="form-control btn btn-primary" id='view'>View chart</div>
                     			</div>
 
                     		</div>
+                    		<!--
                     		<div class="row">
-                    			<div id="main-container">
+								<div class="alert alert-info">
+									<p style="font-size:12pt;">Estimate cost of this period: <strong>29.94$</p>
+								</div>
+                    		</div>
+                    	-->
+                    	<div class="row">
+                    		<div class="col-sm-12">
+                    		<div id="haha-container">
+                    			<div class="block">
+                    				<!-- Checkboxes Title -->
+                    				<div class="block-title">
+                    					<div class="block-options pull-right">
+                    						<a href="javascript:void(0)" class="btn btn-effect-ripple btn-default toggle-bordered enable-tooltip" data-toggle="button" title="To see the water consumption by time period based on the filter you selected">?</a>
+                    					</div>
+                    					<h2>Water Consumption By Time</h2>
+                    				</div>
                     				<svg id="svg"></svg>
                     			</div>
                     		</div>
+                    		</div>
                     	</div>
-
-                    	<div class="container-fluid content" id="pipe-map-content" hidden="">
-                    		<div class="heatmap" style="width:1000px; height:500px;">
-                    			<!--<img style="width:100p%; height:100%;" src="lshape.jpg"/>-->
-
-                    			<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg">
-                    				<!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
-                    				<g>
-                    				<title>Pipe Map</title>
-                    					<line id="svg_5" y2="392.99999" x2="141" y1="115" x1="142" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="none"/>
-                    					<rect id="svg_3" height="45" width="79" y="68" x="130" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="#ffffff"/>
-                    					<rect id="svg_4" height="78" width="47" y="323.99999" x="417" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="#ffffff"/>
-                    					<line id="svg_6" y2="338" x2="197" y1="114.99999" x1="197" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="none"/>
-                    					<line id="svg_7" y2="390" x2="417.00001" y1="390" x1="140.99999" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="none"/>
-                    					<line id="svg_8" y2="337" x2="415" y1="337" x1="195" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="none"/>
-                    					<text transform="matrix(0.6505119204521179,0,0,0.6363636255264282,49.39249499235302,33.4545464515686) " xml:space="preserve" text-anchor="middle" font-family="serif" font-size="24" id="svg_9" y="92.28571" x="79.32948" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">Point 1</text>
-                    					<text transform="matrix(0.6650739312171936,0,0,0.6363636255264282,134.52514881454408,90.36363905668259) " xml:space="preserve" text-anchor="middle" font-family="serif" font-size="24" id="svg_10" y="351.71429" x="460.05748" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">Point 2</text>
-                    				</g>
-                    			</svg>
+                    	<div class="row">
+                    		<div class="col-sm-12">
+                    			<div id="bar-chart">
+                    				<div class="block">
+                    					<!-- Checkboxes Title -->
+                    					<div class="block-title">
+                    						<div class="block-options pull-right">
+                    							<a href="javascript:void(0)" class="btn btn-effect-ripple btn-default toggle-bordered enable-tooltip" data-toggle="button" title="Estimate the water consumption cost for the filter you selected">?</a>
+                    						</div>
+                    						<h2>Cost Estimation</h2>
+                    					</div>
+                    					<svg id="svg-bar"></svg>
+                    				</div>
+                    			</div>
                     		</div>
                     	</div>
 
-                    	<div class="container-fluid content" id="alerts-content" hidden="">
-                    		 <!-- Datatables Block -->
-                        <!-- Datatables is initialized in js/pages/uiTables.js -->
-                        <div class="block full">
-                            <div class="block-title">
-                                <h2>LATEST ALERTS</h2>
-                            </div>
-                            <div class="table-responsive">
-                                <table id="example-datatable" class="table table-striped table-bordered table-vcenter">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center" style="width: 50px;">Timestamp</th>
-                                            <th>Location</th>
-                                            <th>Alert</th>
-                                            <th style="width: 120px;">Status</th>
-                                            <th class="text-center" style="width: 75px;"><i class="fa fa-flash"></i></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="alert-table">
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- END Datatables Block -->
+                    	<div class="row">
+                    			<div class="col-sm-12" id="pie-chart">
+                    				<div class="block">
+                    					<!-- Checkboxes Title -->
+                    					<div class="block-title">
+                    						<div class="block-options pull-right">
+                    							<a href="javascript:void(0)" class="btn btn-effect-ripple btn-default toggle-bordered enable-tooltip" data-toggle="button" title="To see where the most consumption lies on">?</a>
+                    						</div>
+                    						<h2>Consumption Breakdown</h2>
+                    					</div>
+                    					<svg id="svg-pie"></svg>
+                    				</div>
+                    			</div>
                     	</div>
-
                     </div>
-                    <!-- END Page Content -->
+
+                    <div class="container-fluid content" id="pipe-map-content" hidden="">
+                    	<div class="heatmap" style="width:1000px; height:500px;">
+                    		<!--<img style="width:100p%; height:100%;" src="lshape.jpg"/>-->
+
+                    		<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg">
+                    			<!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+                    			<g>
+                    				<title>Pipe Map</title>
+                    				<line id="svg_5" y2="392.99999" x2="141" y1="115" x1="142" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="none"/>
+                    				<rect id="svg_3" height="45" width="79" y="68" x="130" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="#ffffff"/>
+                    				<rect id="svg_4" height="78" width="47" y="323.99999" x="417" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="#ffffff"/>
+                    				<line id="svg_6" y2="338" x2="197" y1="114.99999" x1="197" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="none"/>
+                    				<line id="svg_7" y2="390" x2="417.00001" y1="390" x1="140.99999" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="none"/>
+                    				<line id="svg_8" y2="337" x2="415" y1="337" x1="195" stroke-linecap="null" stroke-linejoin="null" stroke-width="5" stroke="#000000" fill="none"/>
+                    				<text transform="matrix(0.6505119204521179,0,0,0.6363636255264282,49.39249499235302,33.4545464515686) " xml:space="preserve" text-anchor="middle" font-family="serif" font-size="24" id="svg_9" y="92.28571" x="79.32948" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">Point 1</text>
+                    				<text transform="matrix(0.6650739312171936,0,0,0.6363636255264282,134.52514881454408,90.36363905668259) " xml:space="preserve" text-anchor="middle" font-family="serif" font-size="24" id="svg_10" y="351.71429" x="460.05748" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">Point 2</text>
+                    			</g>
+                    		</svg>
+                    	</div>
+                    </div>
+
+                    <div class="container-fluid content" id="alerts-content" hidden="">
+                    	<!-- Datatables Block -->
+                    	<!-- Datatables is initialized in js/pages/uiTables.js -->
+                    	<div class="block full">
+                    		<div class="block-title">
+                    			<h2>LATEST ALERTS</h2>
+                    		</div>
+                    		<div class="table-responsive">
+                    			<table id="example-datatable" class="table table-striped table-bordered table-vcenter">
+                    				<thead>
+                    					<tr>
+                    						<th class="text-center" style="width: 50px;">Timestamp</th>
+                    						<th>Location</th>
+                    						<th>Alert</th>
+                    						<th style="width: 120px;">Status</th>
+                    						<th class="text-center" style="width: 75px;"><i class="fa fa-flash"></i></th>
+                    					</tr>
+                    				</thead>
+                    				<tbody id="alert-table">
+                    				</tbody>
+                    			</table>
+                    		</div>
+                    	</div>
+                    	<!-- END Datatables Block -->
+                    </div>
+
+                    <div class="container-fluid content" id="settings-content" hidden="">
+                    	<div class="block full">
+                    		<div class="block-title">
+                    			<h2>Change Email</h2>
+                    		</div>
+                    		<div class="input-group">
+                    			<input id="new-email-value" class="form-control" type="email" placeholder="New email" />
+                    			<span onclick="changeEmail()" class="input-group-addon btn btn-success">Change</span>
+                    		</div>
+                    	</div>
+                    	<!-- END Datatables Block -->
+                    </div>
+
                 </div>
-                <!-- END Main Container -->
+                <!-- END Page Content -->
             </div>
-            <!-- END Page Container -->
+            <!-- END Main Container -->
         </div>
-        <!-- END Page Wrapper -->
+        <!-- END Page Container -->
+    </div>
+    <!-- END Page Wrapper -->
 
-        <!-- Theme -->
-        <script src="javascripts/vendor/jquery-2.1.3.min.js"></script>
-        <script src="javascripts/vendor/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script src="javascripts/plugins.js"></script>
-        <script src="javascripts/app.js"></script>
-        <script src="javascripts/pages/appMedia.js"></script>
+    <!-- Theme -->
+    <script src="javascripts/vendor/jquery-2.1.3.min.js"></script>
+    <script src="javascripts/vendor/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="javascripts/plugins.js"></script>
+    <script src="javascripts/app.js"></script>
+    <script src="javascripts/pages/appMedia.js"></script>
 
-        <!-- Plugins & libraries -->
-        <script src="//d3js.org/d3.v3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <!-- Plugins & libraries -->
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 
-        <script src="moment-timezone.js"></script>
+    <script src="moment-timezone.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <!--
 <script type="text/javascript" src="app/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 -->
-<script src="bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="heatmap.js"></script>
 <script src="pace.js"></script>
 <script src="jquery.tipsy.js"></script>
