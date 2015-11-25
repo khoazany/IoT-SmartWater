@@ -166,14 +166,14 @@ function execute (isRepulled) {
     Pace.start();
 
     if(isRepulled || !pulledData1) {
-        d3.json(channel1 + "/feed.json?api_key=PORD1D24PPO7TB4L&results=100&timezone=Asia%2FSingapore", 
+        d3.json(channel1 + "/feed.json?api_key=PORD1D24PPO7TB4L&results=8000&timezone=Asia%2FSingapore", 
             function(error1, data1) {
                 if (error1) throw error1;
 
             // Save data
             pulledData1 = data1;
 
-            d3.json(channel2 + "/feed.json?api_key=QCC3G0SI5A5OEUQZ&results=100&timezone=Asia%2FSingapore", 
+            d3.json(channel2 + "/feed.json?api_key=QCC3G0SI5A5OEUQZ&results=8000&timezone=Asia%2FSingapore", 
                 function(error2, data2) {
                     if (error2) throw error2;
 
