@@ -371,7 +371,7 @@ function visualize (rawData1,rawData2) {
     rawData1.feeds.forEach(function(d) {
         d.date = moment(d.created_at);
         //console.log(d.date);
-        d.value = parseFloat(d["field1"])/1000;
+        d.value = parseFloat(d["field1"])/1000000;
         //d.value2 = parseFloat(d["field1"]);
 
         var existed1 = false;
@@ -437,7 +437,7 @@ function visualize (rawData1,rawData2) {
 rawData2.feeds.forEach(function(d) {
     d.date = moment(d.created_at);
         //console.log(d.date);
-        d.value = parseFloat(d["field1"])/1000;
+        d.value = parseFloat(d["field1"])/1000000;
         //d.value2 = parseFloat(d["field1"]);
 
         var existed1 = false;
@@ -503,7 +503,7 @@ rawData2.feeds.forEach(function(d) {
 rawData1.feeds.concat(rawData2.feeds).forEach(function(d) {
     d.date = moment(d.created_at);
         //console.log(d.date);
-        d.value = parseFloat(d["field1"])/1000;
+        d.value = parseFloat(d["field1"])/1000000;
         //d.value2 = parseFloat(d["field1"]);
 
         var existed1 = false;
