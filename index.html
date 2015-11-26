@@ -358,7 +358,7 @@
                     -->
                     <div id="page-content" context-menu data-target="main-content">
                     	<div class="container-fluid">
-                    		<div class="row" id="alert-container">
+                    		<div style="min-height: 50px;" class="row" id="alert-container">
                     		</div>
                     	</div>
                     	<div class="container-fluid content" id="water-consumption-content" hidden="">
@@ -395,7 +395,8 @@
                     			
                     			<div class="col-sm-3">
                     				<label for="filter-type">Step 4:</label>
-                    				<div onclick="viewChart()" class="form-control btn btn-primary" id='view'>View chart</div>
+                    				<div onclick="viewChart()" class="form-control btn btn-primary" id='view'><i class="fa fa-desktop"></i> View chart</div>
+                    				<div onclick="refreshData()" class="form-control btn btn-info" id='view'><i class="fa fa-refresh"></i> Refresh Data</div>
                     			</div>
 
                     		</div>
@@ -511,8 +512,17 @@
                     			<input id="new-email-value" class="form-control" type="email" placeholder="New email" />
                     			<span onclick="changeEmail()" class="input-group-addon btn btn-success">Change</span>
                     		</div>
+                    		<p>Current email: <strong id="current-email"></strong></p>
                     	</div>
-                    	<!-- END Datatables Block -->
+                    	
+                    	<div class="block full">
+                    		<div class="block-title">
+                    			<h2>Other Settings</h2>
+                    		</div>
+                    		<div class="input-group">
+                    			<label class="checkbox-inline"><input id="is-auto-refresh" type="checkbox">Auto refresh data every 30 seconds</label>
+                    		</div>
+                    	</div>
                     </div>
 
                 </div>

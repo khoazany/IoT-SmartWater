@@ -15,6 +15,10 @@ if(!localStorage.getItem('email')) {
     localStorage.setItem('email','khoa.zany@gmail.com');
 }
 
+if(!localStorage.getItem('isAutoRefresh')) {
+    localStorage.setItem('isAutoRefresh',false);
+}
+
 var fromDate = '';
 var fromTime = '';
 
@@ -46,7 +50,7 @@ AVERAGE_CONSUMPTION_MINUTE = 5000.514313272;
 var fields = [1,2]
 
 // Pre-initiate values
-var outputs,pulledData1,pulledData2,heatmapInstance,heatmapData;
+var outputs,pulledData1,pulledData2,heatmapInstance,heatmapData,autoRefreshInterval;
 
 $(document).ready(function () {
     prepareHeatmapAndAlert();
@@ -100,6 +104,9 @@ function reactToNewView (view) {
     $('.content').hide();
     $('#' + view + '-content').show();
 
+    /* Activate or stop auto refresh data */
+    activateOrStopAutoRefresh();
+
     if(view == 'water-consumption') {
 
         $('#filter-type').val(mode);
@@ -130,6 +137,8 @@ function reactToNewView (view) {
         generateHeatmapResult();
     } else if(view == 'alerts') {
         generateAlertTable();
+    } else if(view == 'settings') {
+        generateSettings();
     }
 }
 
@@ -159,10 +168,10 @@ function viewChart () {
 }
 
 function refreshData () {
-    execute(true);
+    execute(true,true,true);
 }
 
-function execute (isRepulled) {
+function execute (isRepulled,isNotExecuted,showAlertWhenRefreshed) {
     Pace.start();
 
     if(isRepulled || !pulledData1) {
@@ -180,7 +189,11 @@ function execute (isRepulled) {
                 // Save data
                 pulledData2 = data2;
 
-                visualize(data1,data2);
+                if(!isNotExecuted) {
+                    visualize(data1,data2);
+                } else if(showAlertWhenRefreshed) {
+                    showSuccessMessage('Data refreshed');
+                }
                 //Pace.stop();
             });
         });
@@ -202,8 +215,8 @@ function visualize (rawData1,rawData2) {
     var x = d3.time.scale()
     .range([0, width]);
 
-    var xBar = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1);
+    var xBar = d3.time.scale()
+    .range([0, width]);
 
     var y = d3.scale.linear()
     .range([height, 0]);
@@ -245,6 +258,37 @@ function visualize (rawData1,rawData2) {
         .orient("bottom")
         .tickFormat(d3Format)
         .ticks(d3.time.minutes, 1);
+    } else if(mode == "month") {
+        xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickFormat(d3Format)
+        .ticks(d3.time.months, 1);
+    }
+
+    var xBarAxis = d3.svg.axis()
+    .scale(xBar)
+    .orient("bottom")
+    .tickFormat(d3Format)
+    .ticks(d3.time.days, 1);
+    if(mode == "hour") {
+        xBarAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickFormat(d3Format)
+        .ticks(d3.time.hours, 1);    
+    } else if(mode == "minute") {
+        xBarAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickFormat(d3Format)
+        .ticks(d3.time.minutes, 1);
+    } else if(mode == "month") {
+        xBarAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .tickFormat(d3Format)
+        .ticks(d3.time.months, 1);
     }
 
     var yAxis = d3.svg.axis()
@@ -252,7 +296,7 @@ function visualize (rawData1,rawData2) {
     .orient("left");
 
     var line = d3.svg.line()
-    .interpolate("cardinal")
+    .interpolate("linear")
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.value); });
 
@@ -276,7 +320,7 @@ function visualize (rawData1,rawData2) {
     if(mode == "day") {
         format = 'DD-MM-YYYY';
     } else if(mode == "hour") {
-        format = 'DD-MM-YYYY HH';
+        format = 'DD-MM-YYYY HH:00';
     } else if(mode == "minute") {
         format = 'DD-MM-YYYY HH:mm';
     } else if(mode == "month") {
@@ -318,7 +362,7 @@ function visualize (rawData1,rawData2) {
     rawData1.feeds.forEach(function(d) {
         d.date = moment(d.created_at);
         //console.log(d.date);
-        d.value = parseFloat(d["field1"]);
+        d.value = parseFloat(d["field1"])/1000;
         //d.value2 = parseFloat(d["field1"]);
 
         var existed1 = false;
@@ -384,7 +428,7 @@ function visualize (rawData1,rawData2) {
 rawData2.feeds.forEach(function(d) {
     d.date = moment(d.created_at);
         //console.log(d.date);
-        d.value = parseFloat(d["field1"]);
+        d.value = parseFloat(d["field1"])/1000;
         //d.value2 = parseFloat(d["field1"]);
 
         var existed1 = false;
@@ -450,7 +494,7 @@ rawData2.feeds.forEach(function(d) {
 rawData1.feeds.concat(rawData2.feeds).forEach(function(d) {
     d.date = moment(d.created_at);
         //console.log(d.date);
-        d.value = parseFloat(d["field1"]);
+        d.value = parseFloat(d["field1"])/1000;
         //d.value2 = parseFloat(d["field1"]);
 
         var existed1 = false;
@@ -530,7 +574,7 @@ rawData1.feeds.concat(rawData2.feeds).forEach(function(d) {
         }
     });
 
-data = transformedData1.concat(transformedData2);
+//data = transformedData1.concat(transformedData2);
 
 console.log(transformedData1.length);
 console.log(transformedData2.length);
@@ -559,8 +603,10 @@ if(transformedData1.length > 50 || transformedData2.length > 50) {
         */
         ];
 
+        /* Clear old charts */
         $('#svg').html('');
         $('#svg-pie').html('');
+        $('#svg-bar').html('');
 
         var svg = d3.select("#svg")
         .attr("width", width + margin.left + margin.right)
@@ -568,7 +614,11 @@ if(transformedData1.length > 50 || transformedData2.length > 50) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        x.domain(d3.extent(data, function(d) { 
+        x.domain(d3.extent(transformedDataTotal, function(d) { 
+            return d.date; 
+        }));
+
+        xBar.domain(d3.extent(transformedDataTotal, function(d) { 
             return d.date; 
         }));
 
@@ -649,23 +699,7 @@ if(transformedData1.length > 50 || transformedData2.length > 50) {
     thegraphEnter.append("path")
     .attr("class", "line")
     .style("stroke", function(d) { return color(d.name); })
-    .attr("d", function(d) { 
-        if(d.values.length > 0) {
-            return line(d.values[0]);
-        } else {
-            return line(0);
-        } 
-    })
-    .transition()
-    .duration(2000)
-    .attrTween('d',function (d){
-        var interpolate = d3.scale.quantile()
-        .domain([0,1])
-        .range(d3.range(1, d.values.length+1));
-        return function(t){
-            return line(d.values.slice(0, interpolate(t)));
-        };
-    });
+    .attr("d", line);
 
     //then append some 'nearly' invisible circles at each data point  
     thegraph.selectAll("circle")
@@ -881,7 +915,7 @@ if(transformedData1.length > 50 || transformedData2.length > 50) {
     }));
       var percent = Math.round(1000 * d.data.value / total) / 10;
       tooltip.select('.label').html(d.data.name);
-      tooltip.select('.count').html(d.data.value.toFixed(2)); 
+      tooltip.select('.count').html(d.data.value.toFixed(2) + 'm^3'); 
       tooltip.select('.percent').html(percent.toFixed(2) + '%'); 
       tooltip.style('display', 'block');
   });
@@ -923,9 +957,12 @@ if(transformedData1.length > 50 || transformedData2.length > 50) {
 
     barSvg.call(tip);
 
+    /*
     xBar.domain(transformedDataTotal.map(function(d) { 
         return d.date;
     }));
+    */
+   
     y.domain([0, d3.max(transformedDataTotal, function(d) {
         if(d.value < 41) {
             return Math.abs(d.value)*1.1700*1.30;
@@ -937,7 +974,7 @@ if(transformedData1.length > 50 || transformedData2.length > 50) {
     barSvg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
-    .call(xAxis)
+    .call(xBarAxis)
     .selectAll("text")  
     .style("text-anchor", "end")
     .attr("transform", function(d) {
@@ -958,8 +995,8 @@ if(transformedData1.length > 50 || transformedData2.length > 50) {
     .data(transformedDataTotal)
     .enter().append("rect")
     .attr("class", "bar")
-    .attr("x", function(d) { return xBar(d.date); })
-    .attr("width", xBar.rangeBand())
+    .attr("x", function(d) { return (xBar(d.date)*(width-(width/transformedDataTotal.length)*0.8)/width); })
+    .attr("width", (width/transformedDataTotal.length)*0.8)
     .attr("y", function(d) { return y(d.value.toFixed(2)); })
     .attr("height", function(d) { return height - y(d.value); })
     .on('mouseover', tip.show)
@@ -969,7 +1006,7 @@ if(transformedData1.length > 50 || transformedData2.length > 50) {
 }
 
 function prepareHeatmapAndAlert () {
-    console.log("hello");
+    //console.log("hello");
     //Pace.start();
     // minimal heatmap instance configuration
     heatmapInstance = h337.create({
@@ -1065,7 +1102,7 @@ function prepareHeatmapAndAlert () {
                 }
 
                 /* For alert table testing, remove on production */
-                updateAlert(0,'Point 1',"Possible leakage at Point 1.Please check!");
+                /*updateAlert(0,'Point 1',"Possible leakage at Point 1.Please check!");*/
 
                 /* For alert testing, remove on production */
 
@@ -1110,6 +1147,32 @@ function generateHeatmapResult () {
             }
         },2000);
     }
+
+function generateSettings () {
+    $('#is-auto-refresh').prop('checked', localStorage.getItem('isAutoRefresh'));
+    $('#current-email').html(localStorage.getItem('email'));
+
+    $('#is-auto-refresh').change(function () {
+        if($(this).prop('checked')) {
+            localStorage.setItem('isAutoRefresh',true);
+        } else {
+            localStorage.setItem('isAutoRefresh',false);
+        }
+        activateOrStopAutoRefresh();
+    });
+}
+
+function activateOrStopAutoRefresh () {
+    console.log('get in');
+    if(localStorage.getItem('isAutoRefresh') == 'true') {
+    autoRefreshInterval = setInterval( function () {
+        refreshData(true,true,true);
+    },30*1000);
+    } else {
+        console.log('hello');
+        clearInterval(autoRefreshInterval);
+    }
+}
 
     function updateAlert (alertId,location,alert) {
         var alerts = JSON.parse(localStorage.getItem('alerts'));
@@ -1205,12 +1268,11 @@ function generateHeatmapResult () {
                 showErrorMessage("Email sent unsuccessfully");
             }
         });
-
-        $('#senderName').val('');
-        $('#senderEmail').val('');
-        $('#message').val('');
     }
 
     function changeEmail () {
         localStorage.setItem('email',$('#new-email-value').val());
+        showSuccessMessage("Email changed successfully to " + $('#new-email-value').val());
+        $('#new-email-value').val('');
+        generateSettings();
     }
