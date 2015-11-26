@@ -55,6 +55,15 @@ var outputs,pulledData1,pulledData2,heatmapInstance,heatmapData,autoRefreshInter
 $(document).ready(function () {
     prepareHeatmapAndAlert();
     reactToNewView(currentView);
+
+    $('#is-auto-refresh').change(function () {
+        if($(this).prop('checked')) {
+            localStorage.setItem('isAutoRefresh',true);
+        } else {
+            localStorage.setItem('isAutoRefresh',false);
+        }
+        activateOrStopAutoRefresh();
+    });
 });
 
 function showErrorMessage (message) {
@@ -961,46 +970,46 @@ if(transformedData1.length > 50 || transformedData2.length > 50) {
     xBar.domain(transformedDataTotal.map(function(d) { 
         return d.date;
     }));
-    */
-   
-    y.domain([0, d3.max(transformedDataTotal, function(d) {
-        if(d.value < 41) {
-            return Math.abs(d.value)*1.1700*1.30;
-        } else {
-            return Math.abs(d.value)*1.4000*1.45;
-        } 
-    })]);
+*/
 
-    barSvg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xBarAxis)
-    .selectAll("text")  
-    .style("text-anchor", "end")
-    .attr("transform", function(d) {
-        return "rotate(-65)" 
-    });
+y.domain([0, d3.max(transformedDataTotal, function(d) {
+    if(d.value < 41) {
+        return Math.abs(d.value)*1.1700*1.30;
+    } else {
+        return Math.abs(d.value)*1.4000*1.45;
+    } 
+})]);
 
-    barSvg.append("g")
-    .attr("class", "y axis")
-    .call(yAxis)
-    .append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 6)
-    .attr("dy", ".71em")
-    .style("text-anchor", "end")
-    .text("Cost(SGD)");
+barSvg.append("g")
+.attr("class", "x axis")
+.attr("transform", "translate(0," + height + ")")
+.call(xBarAxis)
+.selectAll("text")  
+.style("text-anchor", "end")
+.attr("transform", function(d) {
+    return "rotate(-65)" 
+});
 
-    barSvg.selectAll(".bar")
-    .data(transformedDataTotal)
-    .enter().append("rect")
-    .attr("class", "bar")
-    .attr("x", function(d) { return (xBar(d.date)*(width-(width/transformedDataTotal.length)*0.8)/width); })
-    .attr("width", (width/transformedDataTotal.length)*0.8)
-    .attr("y", function(d) { return y(d.value.toFixed(2)); })
-    .attr("height", function(d) { return height - y(d.value); })
-    .on('mouseover', tip.show)
-    .on('mouseout', tip.hide)
+barSvg.append("g")
+.attr("class", "y axis")
+.call(yAxis)
+.append("text")
+.attr("transform", "rotate(-90)")
+.attr("y", 6)
+.attr("dy", ".71em")
+.style("text-anchor", "end")
+.text("Cost(SGD)");
+
+barSvg.selectAll(".bar")
+.data(transformedDataTotal)
+.enter().append("rect")
+.attr("class", "bar")
+.attr("x", function(d) { return (xBar(d.date)*(width-(width/transformedDataTotal.length)*0.8)/width); })
+.attr("width", (width/transformedDataTotal.length)*0.8)
+.attr("y", function(d) { return y(d.value.toFixed(2)); })
+.attr("height", function(d) { return height - y(d.value); })
+.on('mouseover', tip.show)
+.on('mouseout', tip.hide)
 
 }
 }
@@ -1148,31 +1157,22 @@ function generateHeatmapResult () {
         },2000);
     }
 
-function generateSettings () {
-    $('#is-auto-refresh').prop('checked', localStorage.getItem('isAutoRefresh'));
-    $('#current-email').html(localStorage.getItem('email'));
-
-    $('#is-auto-refresh').change(function () {
-        if($(this).prop('checked')) {
-            localStorage.setItem('isAutoRefresh',true);
-        } else {
-            localStorage.setItem('isAutoRefresh',false);
-        }
-        activateOrStopAutoRefresh();
-    });
-}
-
-function activateOrStopAutoRefresh () {
-    console.log('get in');
-    if(localStorage.getItem('isAutoRefresh') == 'true') {
-    autoRefreshInterval = setInterval( function () {
-        refreshData(true,true,true);
-    },30*1000);
-    } else {
-        console.log('hello');
-        clearInterval(autoRefreshInterval);
+    function generateSettings () {
+        $('#is-auto-refresh').prop('checked', localStorage.getItem('isAutoRefresh'));
+        $('#current-email').html(localStorage.getItem('email'));
     }
-}
+
+    function activateOrStopAutoRefresh () {
+        console.log('get in');
+        if(localStorage.getItem('isAutoRefresh') == 'true') {
+            autoRefreshInterval = setInterval( function () {
+                refreshData(true,true,true);
+            },30*1000);
+        } else {
+            console.log('hello');
+            clearInterval(autoRefreshInterval);
+        }
+    }
 
     function updateAlert (alertId,location,alert) {
         var alerts = JSON.parse(localStorage.getItem('alerts'));
@@ -1183,60 +1183,60 @@ function activateOrStopAutoRefresh () {
         if(alerts[alertId] == null ||
             alerts[alertId].status == 'Resolved') {
             // Send to the email defined on Settings
-            sendEmail(alert);
-        }
-
-        alerts[alertId] = {
-            'timestamp': new Date(),
-            'location': location,
-            'alert': alert,
-            'status': 'Unresolved'
-        }
-
-        localStorage.setItem('alerts',JSON.stringify(alerts));
+        sendEmail(alert);
     }
 
-    function generateAlertTable () {
-        var alerts = JSON.parse(localStorage.getItem('alerts'));
+    alerts[alertId] = {
+        'timestamp': new Date(),
+        'location': location,
+        'alert': alert,
+        'status': 'Unresolved'
+    }
 
-        var tableHtml = '';
-        if(alerts) {
-            for (var i = 0; i < alerts.length; i++) {
-                if(alerts[i] != null) {
-                    tableHtml += '<tr>' +
-                    '<td class="text-center">' + moment(alerts[i].timestamp).format("DD/MM/YYYY HH:mm:ss") + '</td>' +
-                    '<td><strong>' + alerts[i].location + '</strong></td>' + 
-                    '<td>' + alerts[i].alert + '</td>';
-                    if(alerts[i].status == 'Unresolved') {
-                        tableHtml += '<td><span class="label label-warning">Unresolved</span></td>' + 
-                        '<td class="text-center">' + 
-                        '<a onClick="resolve(' + i + ')" data-toggle="tooltip" ' + 
-                        'title="Click here after the issue has been resolved" ' + 
-                        'class="btn btn-effect-ripple btn-xs btn-success">' + 
-                        '<i class="fa fa-check"></i></a>' + 
-                        '</td></tr>';
-                    } else {
-                        tableHtml += '<td><span class="label label-success">Resolved</span></td>' + 
-                        '<td class="text-center">' + 
-                        '</td></tr>';
-                    }
+    localStorage.setItem('alerts',JSON.stringify(alerts));
+}
+
+function generateAlertTable () {
+    var alerts = JSON.parse(localStorage.getItem('alerts'));
+
+    var tableHtml = '';
+    if(alerts) {
+        for (var i = 0; i < alerts.length; i++) {
+            if(alerts[i] != null) {
+                tableHtml += '<tr>' +
+                '<td class="text-center">' + moment(alerts[i].timestamp).format("DD/MM/YYYY HH:mm:ss") + '</td>' +
+                '<td><strong>' + alerts[i].location + '</strong></td>' + 
+                '<td>' + alerts[i].alert + '</td>';
+                if(alerts[i].status == 'Unresolved') {
+                    tableHtml += '<td><span class="label label-warning">Unresolved</span></td>' + 
+                    '<td class="text-center">' + 
+                    '<a onClick="resolve(' + i + ')" data-toggle="tooltip" ' + 
+                    'title="Click here after the issue has been resolved" ' + 
+                    'class="btn btn-effect-ripple btn-xs btn-success">' + 
+                    '<i class="fa fa-check"></i></a>' + 
+                    '</td></tr>';
+                } else {
+                    tableHtml += '<td><span class="label label-success">Resolved</span></td>' + 
+                    '<td class="text-center">' + 
+                    '</td></tr>';
                 }
             }
-
         }
 
-        $('#alert-table').html(tableHtml);
     }
 
-    function resolve (index) {
-        var alerts = JSON.parse(localStorage.getItem('alerts'));
-        alerts[index].status = 'Resolved';
-        localStorage.setItem('alerts',JSON.stringify(alerts));
-        generateAlertTable();
-    }
+    $('#alert-table').html(tableHtml);
+}
 
-    function sendEmail (alert) {
-        var email = localStorage.getItem('email');
+function resolve (index) {
+    var alerts = JSON.parse(localStorage.getItem('alerts'));
+    alerts[index].status = 'Resolved';
+    localStorage.setItem('alerts',JSON.stringify(alerts));
+    generateAlertTable();
+}
+
+function sendEmail (alert) {
+    var email = localStorage.getItem('email');
 
         // Fallback if no value on local storage
         if(!email) {
