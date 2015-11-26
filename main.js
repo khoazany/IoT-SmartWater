@@ -1063,22 +1063,22 @@ function prepareHeatmapAndAlert () {
                 var isLeaked = [true,true];
 
                 if(response1.feeds.length == 0) {
-                    isLeaked[1] = false;
+                    isLeaked[0] = false;
                 } else {
                     for (var i = response1.feeds.length - 1; i >= 0; i--) {
                         if(response1.feeds[i]["field1"] > 0) {
-                            isLeaked[1] = false;
+                            isLeaked[0] = false;
                             break;
                         }
                     }
                 }
 
                 if(response2.feeds.length == 0) {
-                    isLeaked[0] = false;
+                    isLeaked[1] = false;
                 } else {
                     for (var i = response2.feeds.length - 1; i >= 0; i--) {
                         if(response2.feeds[i]["field1"] > 0) {
-                            isLeaked[0] = false;
+                            isLeaked[1] = false;
                             break;
                         }
                     }
