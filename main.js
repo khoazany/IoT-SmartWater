@@ -1044,8 +1044,8 @@ function prepareHeatmapAndAlert () {
     */
 
     setInterval(function () {
-        $.get(channel1 + '/feed.json?api_key=PORD1D24PPO7TB4L&results=20',function (response1) {
-            $.get(channel2 + '/feed.json?api_key=QCC3G0SI5A5OEUQZ&results=20',function (response2) {
+        $.get(channel1 + '/feed.json?api_key=PORD1D24PPO7TB4L&results=2',function (response1) {
+            $.get(channel2 + '/feed.json?api_key=QCC3G0SI5A5OEUQZ&results=2',function (response2) {
 
                 points = [
                 {
