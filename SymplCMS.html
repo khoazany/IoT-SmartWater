@@ -1,0 +1,885 @@
+<!DOCTYPE HTML><html><head><title>SymplCMS API API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/kevinrenskers/raml2html 2.1.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          if(history && history.replaceState) {
+            history.replaceState({}, '', '#');
+          }
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>SymplCMS API API documentation <small>version v1</small></h1><p>http://161.202.13.188:9000</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="api_app" class="panel-title">/api/app</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_app_get_user__superUserId_"><span class="parent">/api/app</span>/get/user/{superUserId}</a> <span class="methods"><a href="#api_app_get_user__superUserId__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_api_app_get_user__superUserId_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_app_get_user__superUserId__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get All Apps from super-user id</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_app_get_user__superUserId__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/api/app</span>/get/user/{superUserId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get All Apps from super-user id</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_app_get_user__superUserId__get_request" data-toggle="tab">Request</a></li><li><a href="#api_app_get_user__superUserId__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_app_get_user__superUserId__get_request"><h3>URI Parameters</h3><ul><li><strong>superUserId</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_app_get_user__superUserId__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    "id": 4,
+    "appName": "AppTest Edited",
+    "owner": {
+      "id": 3,
+      "email": "binh@gmail.com",
+      "name": "thai binh"
+    }
+  }
+]</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_app_get__appId_"><span class="parent">/api/app</span>/get/{appId}</a> <span class="methods"><a href="#api_app_get__appId__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_api_app_get__appId_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_app_get__appId__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get an Application by ID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_app_get__appId__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/api/app</span>/get/{appId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get an Application by ID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_app_get__appId__get_request" data-toggle="tab">Request</a></li><li><a href="#api_app_get__appId__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_app_get__appId__get_request"><h3>URI Parameters</h3><ul><li><strong>appId</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_app_get__appId__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 4,
+  "appName": "AppTest Edited",
+  "owner": {
+    "id": 3,
+    "email": "binh@gmail.com",
+    "name": "thai binh"
+  }
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_app_delete__appId_"><span class="parent">/api/app</span>/delete/{appId}</a> <span class="methods"><a href="#api_app_delete__appId__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_api_app_delete__appId_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_app_delete__appId__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Delete an application by OD</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_app_delete__appId__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/api/app</span>/delete/{appId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Delete an application by OD</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_app_delete__appId__delete_request" data-toggle="tab">Request</a></li><li><a href="#api_app_delete__appId__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_app_delete__appId__delete_request"><h3>URI Parameters</h3><ul><li><strong>appId</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_app_delete__appId__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Successfully Deleted Application</p></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_app_update__appId_"><span class="parent">/api/app</span>/update/{appId}</a> <span class="methods"><a href="#api_app_update__appId__put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_api_app_update__appId_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_app_update__appId__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Edit Application by App ID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_app_update__appId__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/api/app</span>/update/{appId}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Edit Application by App ID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_app_update__appId__put_request" data-toggle="tab">Request</a></li><li><a href="#api_app_update__appId__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_app_update__appId__put_request"><h3>URI Parameters</h3><ul><li><strong>appId</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "appName": {
+    "type": "string",
+    "required":true
+  },
+  "userId": {
+    "type": "integer",
+    "required": true
+  }
+}
+
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "appName": "Booking App Edited",
+  "userId": 3
+}
+</code></pre></div><div class="tab-pane" id="api_app_update__appId__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 4,
+  "appName": "AppTest Edited",
+  "owner": {
+    "id": 3,
+    "email": "binh@gmail.com",
+    "name": "thai binh"
+  }
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_app_create"><span class="parent">/api/app</span>/create</a> <span class="methods"><a href="#api_app_create_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_app_create" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_app_create_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a new Application</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_app_create_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/app</span>/create</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a new Application</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_app_create_post_request" data-toggle="tab">Request</a></li><li><a href="#api_app_create_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_app_create_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "appName": {
+    "type": "string",
+    "required":true
+  },
+  "userId": {
+    "type": "integer",
+    "required": true
+  }
+}
+
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+  "appName": "Booking App",
+  "userId": 3
+}
+</code></pre></div><div class="tab-pane" id="api_app_create_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 4,
+  "appName": "AppTest",
+  "owner": {
+    "id": 3,
+    "email": "binh@gmail.com",
+    "name": "thai binh"
+  }
+}</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="api_objecttype" class="panel-title">/api/objecttype</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_objecttype_create"><span class="parent">/api/objecttype</span>/create</a> <span class="methods"><a href="#api_objecttype_create_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_objecttype_create" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_objecttype_create_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a new Class . For any class, except the key field, we need two other compulsory fields called primary or required. Primary means that these fields will be auto presented when an object has been created from this class. And required field means that as long as users add that field to object creation, they have to specify the value.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_objecttype_create_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/objecttype</span>/create</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a new Class . For any class, except the key field, we need two other compulsory fields called primary or required. Primary means that these fields will be auto presented when an object has been created from this class. And required field means that as long as users add that field to object creation, they have to specify the value.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_objecttype_create_post_request" data-toggle="tab">Request</a></li><li><a href="#api_objecttype_create_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_objecttype_create_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "appId": {
+    "type": "int",
+    "required":true
+  },
+  "name": {
+    "type": "String",
+    "required": true
+  },
+  "template":[
+	{
+	"key":"String",
+	"primary":"boolean",
+	"required":"boolean"
+	}
+  ]
+}
+
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+    "appId": 4,
+    "name": "House",
+    "template": [
+        {
+           "key": "name",
+           "primary": true,
+           "required": false
+        },
+        {
+           "key": "color",
+           "primary": false,
+           "required": true
+        }
+    ]
+}
+
+The template field is optional that means you can define content as 
+follow:
+
+{
+    "appId": 4,
+    "name": "House"
+}
+
+In this case , its template field will be [].</code></pre></div><div class="tab-pane" id="api_objecttype_create_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 5,
+  "name": "House",
+  "apps": [
+    {
+      "id": 4,
+      "appName": "AppTest Edited",
+      "owner": {
+        "id": 3,
+        "email": "binh@gmail.com",
+        "name": "thai binh"
+      }
+    }
+  ],
+  "template": [
+    {
+      "key": "name",
+      "required": false,
+      "primary": true
+    },
+    {
+      "key": "color",
+      "required": true,
+      "primary": false
+    }
+  ]
+}
+
+If template field is left empty. The result would be as follow:
+
+{
+  "id": 5,
+  "name": "House",
+  "apps": [
+    {
+      "id": 4,
+      "appName": "AppTest Edited",
+      "owner": {
+        "id": 3,
+        "email": "binh@gmail.com",
+        "name": "thai binh"
+      }
+    }
+  ],
+  "template": []
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_objecttype_update__classID_"><span class="parent">/api/objecttype</span>/update/{classID}</a> <span class="methods"><a href="#api_objecttype_update__classID__put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_api_objecttype_update__classID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_objecttype_update__classID__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Edit Class properties by class id</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_objecttype_update__classID__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/api/objecttype</span>/update/{classID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Edit Class properties by class id</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_objecttype_update__classID__put_request" data-toggle="tab">Request</a></li><li><a href="#api_objecttype_update__classID__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_objecttype_update__classID__put_request"><h3>URI Parameters</h3><ul><li><strong>classID</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>{
+  "appId": {
+    "type": "int",
+    "required":true
+  },
+  "name": {
+    "type": "String",
+    "required": true
+  },
+  "template":[
+	{
+	"key":"String",
+	"primary":"boolean",
+	"required":"boolean"
+	}
+  ]
+}
+
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+    "appId": 4,
+    "name": "House Edited 1",
+    "template": [
+        {
+            "key": "owner",
+            "required": false,
+            "primary": true
+        },
+          {
+            "key": "color",
+            "required": true,
+            "primary": false
+          },
+          {
+            "key": "price",
+            "required": true,
+            "primary": true
+          }
+          
+          
+    ]
+}
+
+The template field is optional that means you can define content as 
+follow:
+
+{
+    "appId": 4,
+    "name": "House Edited 1"
+}
+
+In this case , its template field will be [].</code></pre></div><div class="tab-pane" id="api_objecttype_update__classID__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 5,
+  "name": "House Edited 1",
+  "apps": [
+    {
+      "id": 4,
+      "appName": "AppTest Edited",
+      "owner": {
+        "id": 3,
+        "email": "binh@gmail.com",
+        "name": "thai binh"
+      }
+    }
+  ],
+  "template": [
+    {
+      "key": "owner",
+      "required": false,
+      "primary": true
+    },
+    {
+      "key": "color",
+      "required": true,
+      "primary": false
+    },
+    {
+      "key": "price",
+      "required": true,
+      "primary": true
+    }
+  ]
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_objecttype_get__classID_"><span class="parent">/api/objecttype</span>/get/{classID}</a> <span class="methods"><a href="#api_objecttype_get__classID__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_api_objecttype_get__classID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_objecttype_get__classID__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Retrieve Class by class ID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_objecttype_get__classID__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/api/objecttype</span>/get/{classID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Retrieve Class by class ID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_objecttype_get__classID__get_request" data-toggle="tab">Request</a></li><li><a href="#api_objecttype_get__classID__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_objecttype_get__classID__get_request"><h3>URI Parameters</h3><ul><li><strong>classID</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_objecttype_get__classID__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 6,
+  "name": "School",
+  "apps": [
+    {
+      "id": 4,
+      "appName": "AppTest Edited",
+      "owner": {
+        "id": 3,
+        "email": "binh@gmail.com",
+        "name": "thai binh"
+      }
+    }
+  ],
+  "template": []
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_objecttype_delete__classID_"><span class="parent">/api/objecttype</span>/delete/{classID}</a> <span class="methods"><a href="#api_objecttype_delete__classID__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_api_objecttype_delete__classID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_objecttype_delete__classID__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Delete Class by class ID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_objecttype_delete__classID__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/api/objecttype</span>/delete/{classID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Delete Class by class ID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_objecttype_delete__classID__delete_request" data-toggle="tab">Request</a></li><li><a href="#api_objecttype_delete__classID__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_objecttype_delete__classID__delete_request"><h3>URI Parameters</h3><ul><li><strong>classID</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_objecttype_delete__classID__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Successfully deleted class</p></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_objecttype_get_app__appID_"><span class="parent">/api/objecttype</span>/get/app/{appID}</a> <span class="methods"><a href="#api_objecttype_get_app__appID__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_api_objecttype_get_app__appID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_objecttype_get_app__appID__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get all classes by app ID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_objecttype_get_app__appID__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/api/objecttype</span>/get/app/{appID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get all classes by app ID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_objecttype_get_app__appID__get_request" data-toggle="tab">Request</a></li><li><a href="#api_objecttype_get_app__appID__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_objecttype_get_app__appID__get_request"><h3>URI Parameters</h3><ul><li><strong>appID</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_objecttype_get_app__appID__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    "id": 6,
+    "name": "School",
+    "apps": [
+      {
+        "id": 4,
+        "appName": "AppTest Edited",
+        "owner": {
+          "id": 3,
+          "email": "binh@gmail.com",
+          "name": "thai binh"
+        }
+      }
+    ],
+    "template": []
+  },
+  {
+    "id": 5,
+    "name": "House Edited 1",
+    "apps": [
+      {
+        "id": 4,
+        "appName": "AppTest Edited",
+        "owner": {
+          "id": 3,
+          "email": "binh@gmail.com",
+          "name": "thai binh"
+        }
+      }
+    ],
+    "template": [
+      {
+        "key": "owner",
+        "required": false,
+        "primary": true
+      },
+      {
+        "key": "color",
+        "required": true,
+        "primary": false
+      },
+      {
+        "key": "price",
+        "required": true,
+        "primary": true
+      }
+    ]
+  }
+]</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="api_object" class="panel-title">/api/object</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object_create"><span class="parent">/api/object</span>/create</a> <span class="methods"><a href="#api_object_create_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_object_create" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object_create_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a new object from a class.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object_create_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/object</span>/create</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a new object from a class.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object_create_post_request" data-toggle="tab">Request</a></li><li><a href="#api_object_create_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object_create_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>**This API allows to create object with existing class or new class (at the same time). If users want to create from existing class , key in objectTypeId otherwise ObjectTypeName. These two fields can&#39;t be part of the request body at the same time.
+
+
+**In case, an object is being created with file upload. The id of 
+the file obtained by File Upload API should be used within properties attributes.
+
+** Look at our example to see if you want to add relationships for object
+
+{
+  "country": {
+    "type": "String",
+    "required":false
+  },
+  "region": {
+    "type": "String",
+    "required": false
+  },
+  "region": {
+    "type": "String",
+    "required": false
+  },
+  "name": {
+    "type": "String",
+    "required": false
+  },
+  "objectTypeId": {
+    "type": "Integer",
+    "required": true
+  },
+  "objectTypeName": {
+    "type": "String",
+    "required": true
+  },
+  "userId": {
+    "type": "Integer",
+    "required": true
+  },
+  "appId": {
+    "type": "Integer",
+    "required": true
+  },
+  "properties":[
+  	{
+  	"field":"value"
+  	}
+  ]
+}
+
+
+</code></pre><p><strong>Example</strong>:</p><pre><code>Without File upload
+
+{
+    "country": "Singapore",
+    "region": "",
+    "city": "Singapore",
+    "name": "My House",
+    "objectTypeId": 2,
+    "userId": 3,
+    "appId": 3,
+    "properties": [
+        {
+            "name": "my house"
+        },
+        {
+            "color": "blue"
+        }
+    ]
+}
+
+With File Upload
+
+{
+    "country": "Singapore",
+    "region": "",
+    "city": "Singapore",
+    "name": "My House w File",
+    "objectTypeId": 2,
+    "userId": 3,
+    "appId": 3,
+    "properties": [
+        {
+            "name": "My House w File"
+        },
+        {
+            "color": "blue"
+        },
+        {
+            "photo": {
+                "file": 1
+            }
+        }
+    ]
+}
+
+If creating object with relationship. Need to add  key and specify value inside properties as follow
+The key can be any name (in our example we use "owned"). The value must be in format &lt;Class name&gt; : [objectID1,ObjectID2,etc.]
+
+For one to many
+{
+    ...
+    ...
+    "properties":[
+        {
+          ...
+        },
+        {
+          "owned": {
+                "Toy": [1,3]
+            }
+        }
+    ]
+}
+
+For one to one
+{
+    ...
+    ...
+    "properties":[
+        {
+          ...
+        },
+        {
+          "owned": {
+                "Toy": 1
+            }
+        }
+    ]
+}</code></pre></div><div class="tab-pane" id="api_object_create_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>Without File upload
+
+{
+  "id": 12,
+  "name": "my house",
+  "color": "blue"
+}
+
+With file upload
+
+{
+  "id": 14,
+  "name": "my house",
+  "color": "blue",
+  "photo": {
+    "file": {
+      "id": 2,
+      "name": "de0b98fa-5133-4f00-b50d-3ce05e69b8deCapture.JPG",
+      "size": 105300402176,
+      "url": "https://s3-ap-southeast-1.amazonaws.com/symplcms/symplCMSTest/de0b98fa-5133-4f00-b50d-3ce05e69b8deCapture.JPG"
+    }
+  }
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object_upload"><span class="parent">/api/object</span>/upload</a> <span class="methods"><a href="#api_object_upload_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_object_upload" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object_upload_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>This API serves to upload any files from your local machine . The return id in response should be used in create Object with File API to actually create an object (with file) in our CMS.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object_upload_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/object</span>/upload</h4></div><div class="modal-body"><div class="alert alert-info"><p>This API serves to upload any files from your local machine . The return id in response should be used in create Object with File API to actually create an object (with file) in our CMS.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object_upload_post_request" data-toggle="tab">Request</a></li><li><a href="#api_object_upload_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object_upload_post_request"><h3>Body</h3><p><strong>Type: multipart/form-data</strong></p><strong>Form Parameters</strong><ul><li><strong>file</strong>: <em>required (file)</em><p>The file to be uploaded</p></li></ul></div><div class="tab-pane" id="api_object_upload_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 1,
+  "name": "f469557e-c94b-486c-951d-fafdf8a89742PASTA-banner.jpg",
+  "size": 105300402176,
+  "url": "https://s3-ap-southeast-1.amazonaws.com/symplcms/symplCMSTest/f469557e-c94b-486c-951d-fafdf8a89742PASTA-banner.jpg"
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object_get_app__appID_"><span class="parent">/api/object</span>/get/app/{appID}</a> <span class="methods"><a href="#api_object_get_app__appID__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_api_object_get_app__appID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object_get_app__appID__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get All objects by appId</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object_get_app__appID__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/api/object</span>/get/app/{appID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get All objects by appId</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object_get_app__appID__get_request" data-toggle="tab">Request</a></li><li><a href="#api_object_get_app__appID__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object_get_app__appID__get_request"><h3>URI Parameters</h3><ul><li><strong>appID</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_object_get_app__appID__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    "id": 15,
+    "price": "40",
+    "color": "blue"
+  }
+]</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object_get__objectID_"><span class="parent">/api/object</span>/get/{objectID}</a> <span class="methods"><a href="#api_object_get__objectID__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_api_object_get__objectID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object_get__objectID__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get object by ID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object_get__objectID__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/api/object</span>/get/{objectID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get object by ID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object_get__objectID__get_request" data-toggle="tab">Request</a></li><li><a href="#api_object_get__objectID__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object_get__objectID__get_request"><h3>URI Parameters</h3><ul><li><strong>objectID</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_object_get__objectID__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 4,
+  "name": "My House w File",
+  "color": "blue",
+  "photo": {
+    "file": {
+      "id": 1,
+      "name": "f469557e-c94b-486c-951d-fafdf8a89742PASTA-banner.jpg",
+      "size": 105300402176,
+      "url": "https://s3-ap-southeast-1.amazonaws.com/null/symplCMSTest/f469557e-c94b-486c-951d-fafdf8a89742PASTA-banner.jpg"
+    }
+  }
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object_get_app__AppID__objecttype__ObjectTypeID_"><span class="parent">/api/object</span>/get/app/{AppID}/objecttype/{ObjectTypeID}</a> <span class="methods"><a href="#api_object_get_app__AppID__objecttype__ObjectTypeID__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_api_object_get_app__AppID__objecttype__ObjectTypeID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object_get_app__AppID__objecttype__ObjectTypeID__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get All objects from specific class and app</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object_get_app__AppID__objecttype__ObjectTypeID__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/api/object</span>/get/app/{AppID}/objecttype/{ObjectTypeID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get All objects from specific class and app</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object_get_app__AppID__objecttype__ObjectTypeID__get_request" data-toggle="tab">Request</a></li><li><a href="#api_object_get_app__AppID__objecttype__ObjectTypeID__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object_get_app__AppID__objecttype__ObjectTypeID__get_request"><h3>URI Parameters</h3><ul><li><strong>AppID</strong>: <em>required (string)</em></li><li><strong>ObjectTypeID</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_object_get_app__AppID__objecttype__ObjectTypeID__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    "id": 15,
+    "price": "40",
+    "color": "blue"
+  }
+]</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object_update__objectID_"><span class="parent">/api/object</span>/update/{objectID}</a> <span class="methods"><a href="#api_object_update__objectID__put"><span class="badge badge_put">put</span></a></span></h4></div><div id="panel_api_object_update__objectID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object_update__objectID__put'" class="list-group-item"><span class="badge badge_put">put</span><div class="method_description"><p>Update object by ID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object_update__objectID__put"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_put">put</span> <span class="parent">/api/object</span>/update/{objectID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update object by ID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object_update__objectID__put_request" data-toggle="tab">Request</a></li><li><a href="#api_object_update__objectID__put_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object_update__objectID__put_request"><h3>URI Parameters</h3><ul><li><strong>objectID</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>Without File upload
+
+{
+    "country": "Singapore",
+    "region": "",
+    "city": "Singapore",
+    "name": "My House",
+    "objectTypeId": 2,
+    "userId": 3,
+    "appId": 3,
+    "properties": [
+        {
+            "name": "my house"
+        },
+        {
+            "color": "blue"
+        }
+    ]
+}
+
+With File Upload
+
+{
+    "country": "Singapore",
+    "region": "",
+    "city": "Singapore",
+    "name": "My House w File",
+    "objectTypeId": 2,
+    "userId": 3,
+    "appId": 3,
+    "properties": [
+        {
+            "name": "My House w File"
+        },
+        {
+            "color": "blue"
+        },
+        {
+            "photo": {
+                "file": 1
+            }
+        }
+    ]
+}</code></pre></div><div class="tab-pane" id="api_object_update__objectID__put_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>Without File upload
+
+{
+    "country": "Singapore",
+    "region": "",
+    "city": "Singapore",
+    "name": "My House",
+    "objectTypeId": 2,
+    "userId": 3,
+    "appId": 3,
+    "properties": [
+        {
+            "name": "my house"
+        },
+        {
+            "color": "blue"
+        }
+    ]
+}
+
+With File Upload
+
+{
+    "country": "Singapore",
+    "region": "",
+    "city": "Singapore",
+    "name": "My House w File",
+    "objectTypeId": 2,
+    "userId": 3,
+    "appId": 3,
+    "properties": [
+        {
+            "name": "My House w File"
+        },
+        {
+            "color": "blue"
+        },
+        {
+            "photo": {
+                "file": 1
+            }
+        }
+    ]
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object_delete__objectID_"><span class="parent">/api/object</span>/delete/{objectID}</a> <span class="methods"><a href="#api_object_delete__objectID__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_api_object_delete__objectID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object_delete__objectID__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Delete Object by ID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object_delete__objectID__delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/api/object</span>/delete/{objectID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Delete Object by ID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object_delete__objectID__delete_request" data-toggle="tab">Request</a></li><li><a href="#api_object_delete__objectID__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object_delete__objectID__delete_request"><h3>URI Parameters</h3><ul><li><strong>objectID</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_object_delete__objectID__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Successfully deleted Object</p></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object__objectID__add_properties"><span class="parent">/api/object</span>/{objectID}/add/properties</a> <span class="methods"><a href="#api_object__objectID__add_properties_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_object__objectID__add_properties" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object__objectID__add_properties_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Add new properties &amp; their respective values ( can be more than one key-value pair) to specic Object by ID. If the property existed, return error</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object__objectID__add_properties_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/object</span>/{objectID}/add/properties</h4></div><div class="modal-body"><div class="alert alert-info"><p>Add new properties &amp; their respective values ( can be more than one key-value pair) to specic Object by ID. If the property existed, return error</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object__objectID__add_properties_post_request" data-toggle="tab">Request</a></li><li><a href="#api_object__objectID__add_properties_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object__objectID__add_properties_post_request"><h3>URI Parameters</h3><ul><li><strong>objectID</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>**This API allows to add new key-value pair to the existing object. If an object already has that key, return error
+{
+  "appId": {
+    "type": "Integer",
+    "required":true
+  },
+  "properties": {
+      [{"key":"value"}]
+  }
+}
+
+
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+    "appId": 2,
+    "properties": [
+        {
+            "new_property": "Smiling"
+        }
+    ]
+}</code></pre></div><div class="tab-pane" id="api_object__objectID__add_properties_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 6,
+  "name": "my house",
+  "color": "blue",
+  "new_property": "Smiling"
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object__objectID__update_properties"><span class="parent">/api/object</span>/{objectID}/update/properties</a> <span class="methods"><a href="#api_object__objectID__update_properties_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_object__objectID__update_properties" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object__objectID__update_properties_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Update object&#39;s key-value pairs . Only key-value pairs in request body will be updated, if there is any new key-value pair, return error</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object__objectID__update_properties_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/object</span>/{objectID}/update/properties</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update object&#39;s key-value pairs . Only key-value pairs in request body will be updated, if there is any new key-value pair, return error</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object__objectID__update_properties_post_request" data-toggle="tab">Request</a></li><li><a href="#api_object__objectID__update_properties_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object__objectID__update_properties_post_request"><h3>URI Parameters</h3><ul><li><strong>objectID</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>**This API allows to add new key-value pair to the existing object. If an object already has that key, return error
+{
+  "appId": {
+    "type": "Integer",
+    "required":true
+  },
+  "properties": {
+      [{"key":"value"}]
+  }
+}
+
+
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+    "appId": 3,
+    "properties": [
+        {
+             "color": "blue_edited"
+        },
+        {
+            "new_property": "Edited"
+        }
+    ]
+}
+</code></pre></div><div class="tab-pane" id="api_object__objectID__update_properties_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 6,
+  "name": "my house",
+  "color": "blue_edited",
+  "new_property": "Edited"
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object__objectID__assign_properties"><span class="parent">/api/object</span>/{objectID}/assign/properties</a> <span class="methods"><a href="#api_object__objectID__assign_properties_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_object__objectID__assign_properties" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object__objectID__assign_properties_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>This method is similar to update api except if there is any new key-value pair, new property and value will be created</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object__objectID__assign_properties_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/object</span>/{objectID}/assign/properties</h4></div><div class="modal-body"><div class="alert alert-info"><p>This method is similar to update api except if there is any new key-value pair, new property and value will be created</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object__objectID__assign_properties_post_request" data-toggle="tab">Request</a></li><li><a href="#api_object__objectID__assign_properties_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object__objectID__assign_properties_post_request"><h3>URI Parameters</h3><ul><li><strong>objectID</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>**This API allows to add new key-value pair to the existing object. If an object already has that key, return error
+{
+  "appId": {
+    "type": "Integer",
+    "required":true
+  },
+  "properties": {
+      [{"key":"value"}]
+  }
+}
+
+
+</code></pre><p><strong>Example</strong>:</p><pre><code>{
+    "appId": 3,
+    "properties": [
+        {
+             "color": "blue_edited_2"
+        },
+        {
+            "new_property_1": "New"
+        }
+    ]
+}
+</code></pre></div><div class="tab-pane" id="api_object__objectID__assign_properties_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 12,
+  "name": "my house",
+  "color": "blue_edited_2",
+  "new_property_1": "New"
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object__objectID__delete_properties"><span class="parent">/api/object</span>/{objectID}/delete/properties</a> <span class="methods"><a href="#api_object__objectID__delete_properties_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_object__objectID__delete_properties" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object__objectID__delete_properties_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>This method delete key-value pair from object by its id</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object__objectID__delete_properties_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/object</span>/{objectID}/delete/properties</h4></div><div class="modal-body"><div class="alert alert-info"><p>This method delete key-value pair from object by its id</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object__objectID__delete_properties_post_request" data-toggle="tab">Request</a></li><li><a href="#api_object__objectID__delete_properties_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object__objectID__delete_properties_post_request"><h3>URI Parameters</h3><ul><li><strong>objectID</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Schema</strong>:</p><pre><code>List of key needs to be deleted  
+
+["key"]
+</code></pre><p><strong>Example</strong>:</p><pre><code>["new_property_1","color"]</code></pre></div><div class="tab-pane" id="api_object__objectID__delete_properties_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 12,
+  "name": "my house",
+  "new_property_2": "New"
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object_searchByProperties_app__appID__key__key__value__value_"><span class="parent">/api/object</span>/searchByProperties/app/{appID}/key/{key}/value/{value}</a> <span class="methods"><a href="#api_object_searchByProperties_app__appID__key__key__value__value__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_api_object_searchByProperties_app__appID__key__key__value__value_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object_searchByProperties_app__appID__key__key__value__value__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>This method will search for all objects by specifying appID, the key and value . For example: /api/object/searchByProperties/app/2/key/name/value/E means "Get All objects which are from app with id of 2 having key = name and value containing &#39;E&#39;"</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object_searchByProperties_app__appID__key__key__value__value__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/api/object</span>/searchByProperties/app/{appID}/key/{key}/value/{value}</h4></div><div class="modal-body"><div class="alert alert-info"><p>This method will search for all objects by specifying appID, the key and value . For example: /api/object/searchByProperties/app/2/key/name/value/E means "Get All objects which are from app with id of 2 having key = name and value containing &#39;E&#39;"</p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object_searchByProperties_app__appID__key__key__value__value__get_request" data-toggle="tab">Request</a></li><li><a href="#api_object_searchByProperties_app__appID__key__key__value__value__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object_searchByProperties_app__appID__key__key__value__value__get_request"><h3>URI Parameters</h3><ul><li><strong>appID</strong>: <em>required (string)</em></li><li><strong>key</strong>: <em>required (string)</em></li><li><strong>value</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="api_object_searchByProperties_app__appID__key__key__value__value__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>  *the response will be similarly in this format
+
+[
+  {
+    "id": 10,
+    "name": "my house",
+    "color": "white"
+  },
+  {
+    "id": 11,
+    "name": "my house",
+    "color": "blue"
+  },
+  {
+    "id": 13,
+    "name": "my house",
+    "color": "blue",
+    "photo": {
+      "file": {
+        "id": 2,
+        "name": "de0b98fa-5133-4f00-b50d-3ce05e69b8deCapture.JPG",
+        "size": 105300402176,
+        "url": "https://s3-ap-southeast-1.amazonaws.com/null/symplCMSTest/de0b98fa-5133-4f00-b50d-3ce05e69b8deCapture.JPG"
+      }
+    }
+  },
+  {
+    "id": 14,
+    "name": "my house",
+    "color": "blue",
+    "photo": {
+      "file": {
+        "id": 2,
+        "name": "de0b98fa-5133-4f00-b50d-3ce05e69b8deCapture.JPG",
+        "size": 105300402176,
+        "url": "https://s3-ap-southeast-1.amazonaws.com/null/symplCMSTest/de0b98fa-5133-4f00-b50d-3ce05e69b8deCapture.JPG"
+      }
+    }
+  },
+  {
+    "id": 12,
+    "name": "my house",
+    "new_property_2": "New"
+  }
+]</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object__objectID__relationship_add__addedObjectID_"><span class="parent">/api/object</span>/{objectID}/relationship/add/{addedObjectID}</a> <span class="methods"><a href="#api_object__objectID__relationship_add__addedObjectID__post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_object__objectID__relationship_add__addedObjectID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object__objectID__relationship_add__addedObjectID__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>This API used to add relationship for existing objects (already a field to contain relationships). In our example, this would be "own" (could be different name). Return error if the object not being found or the field (containing relationship) not found. The following example is to add object with ID of 727 into object with ID 723 <a href="http://161.202.13.188:9000/api/object/723/relationship/add/727">http://161.202.13.188:9000/api/object/723/relationship/add/727</a></p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object__objectID__relationship_add__addedObjectID__post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/object</span>/{objectID}/relationship/add/{addedObjectID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>This API used to add relationship for existing objects (already a field to contain relationships). In our example, this would be "own" (could be different name). Return error if the object not being found or the field (containing relationship) not found. The following example is to add object with ID of 727 into object with ID 723 <a href="http://161.202.13.188:9000/api/object/723/relationship/add/727">http://161.202.13.188:9000/api/object/723/relationship/add/727</a></p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object__objectID__relationship_add__addedObjectID__post_request" data-toggle="tab">Request</a></li><li><a href="#api_object__objectID__relationship_add__addedObjectID__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object__objectID__relationship_add__addedObjectID__post_request"><h3>URI Parameters</h3><ul><li><strong>objectID</strong>: <em>required (string)</em></li><li><strong>addedObjectID</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+    "appId": 6,
+    "propertyName": "own"
+}</code></pre></div><div class="tab-pane" id="api_object__objectID__relationship_add__addedObjectID__post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 723,
+  "EOM": "url",
+  "EventName": "EventTest727",
+  "Description": "This is EventTest723",
+  "EventType": "Test",
+  "Location": "Test",
+  "Sponsors": "array url",
+  "StartTime": "startTime",
+  "EndTime": "endTime",
+  "own": [
+    {
+      "id": 727
+    }
+  ]
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object__objectID__relationship_update_oldObjectID_newObjectID"><span class="parent">/api/object</span>/{objectID}/relationship/update/oldObjectID/newObjectID</a> <span class="methods"><a href="#api_object__objectID__relationship_update_oldObjectID_newObjectID_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_object__objectID__relationship_update_oldObjectID_newObjectID" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object__objectID__relationship_update_oldObjectID_newObjectID_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>This API used to update relationship for existing objects (already a field to contain relationships). In our example, this would be "own" (could be different name). Return error if the object not being found or the field (containing relationship) not found. The following example is to update relationship of object with ID of 723, replace object with ID 727 by object with ID 737 (Assuming object 723 intially has relationship with object 727) <a href="http://161.202.13.188:9000/api/object/723/relationship/update/727/737">http://161.202.13.188:9000/api/object/723/relationship/update/727/737</a></p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object__objectID__relationship_update_oldObjectID_newObjectID_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/object</span>/{objectID}/relationship/update/oldObjectID/newObjectID</h4></div><div class="modal-body"><div class="alert alert-info"><p>This API used to update relationship for existing objects (already a field to contain relationships). In our example, this would be "own" (could be different name). Return error if the object not being found or the field (containing relationship) not found. The following example is to update relationship of object with ID of 723, replace object with ID 727 by object with ID 737 (Assuming object 723 intially has relationship with object 727) <a href="http://161.202.13.188:9000/api/object/723/relationship/update/727/737">http://161.202.13.188:9000/api/object/723/relationship/update/727/737</a></p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object__objectID__relationship_update_oldObjectID_newObjectID_post_request" data-toggle="tab">Request</a></li><li><a href="#api_object__objectID__relationship_update_oldObjectID_newObjectID_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object__objectID__relationship_update_oldObjectID_newObjectID_post_request"><h3>URI Parameters</h3><ul><li><strong>objectID</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+    "appId": 6,
+    "propertyName": "own"
+}</code></pre></div><div class="tab-pane" id="api_object__objectID__relationship_update_oldObjectID_newObjectID_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 723,
+  "EOM": "url",
+  "EventName": "EventTest727",
+  "Description": "This is EventTest723",
+  "EventType": "Test",
+  "Location": "Test",
+  "Sponsors": "array url",
+  "StartTime": "startTime",
+  "EndTime": "endTime",
+  "own": [
+    {
+      "id": 737
+    }
+  ]
+}</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_api_object__objectID__relationship_delete__deleteObjectID_"><span class="parent">/api/object</span>/{objectID}/relationship/delete/{deleteObjectID}</a> <span class="methods"><a href="#api_object__objectID__relationship_delete__deleteObjectID__post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_api_object__objectID__relationship_delete__deleteObjectID_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#api_object__objectID__relationship_delete__deleteObjectID__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Delete an object from its relationship with another object. In the example below, let say we want to delete object with ID 737 from object with ID 723. In this case, assuming object 723 only owns one object (737). After this operation, the relationship field should be []. <a href="http://161.202.13.188:9000/api/object/723/relationship/delete/737">http://161.202.13.188:9000/api/object/723/relationship/delete/737</a></p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="api_object__objectID__relationship_delete__deleteObjectID__post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/api/object</span>/{objectID}/relationship/delete/{deleteObjectID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Delete an object from its relationship with another object. In the example below, let say we want to delete object with ID 737 from object with ID 723. In this case, assuming object 723 only owns one object (737). After this operation, the relationship field should be []. <a href="http://161.202.13.188:9000/api/object/723/relationship/delete/737">http://161.202.13.188:9000/api/object/723/relationship/delete/737</a></p></div><ul class="nav nav-tabs"><li class="active"><a href="#api_object__objectID__relationship_delete__deleteObjectID__post_request" data-toggle="tab">Request</a></li><li><a href="#api_object__objectID__relationship_delete__deleteObjectID__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="api_object__objectID__relationship_delete__deleteObjectID__post_request"><h3>URI Parameters</h3><ul><li><strong>objectID</strong>: <em>required (string)</em></li><li><strong>deleteObjectID</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+    "appId": 6,
+    "propertyName": "own"
+}</code></pre></div><div class="tab-pane" id="api_object__objectID__relationship_delete__deleteObjectID__post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "id": 723,
+  "EOM": "url",
+  "EventName": "EventTest727",
+  "Description": "This is EventTest723",
+  "EventType": "Test",
+  "Location": "Test",
+  "Sponsors": "array url",
+  "StartTime": "startTime",
+  "EndTime": "endTime",
+  "own": []
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#api_app">/api/app</a></li><li><a href="#api_objecttype">/api/objecttype</a></li><li><a href="#api_object">/api/object</a></li></ul></div></div></div></div></body></html>
